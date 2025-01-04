@@ -5,6 +5,7 @@ int main()
 	FILE* fptr = fopen("input", "r");
 	char input[8000];
 	int floor = 0;
+	int basement = 0;
 
 	if (fptr != NULL)
 	{
@@ -12,10 +13,23 @@ int main()
 		{
 			for (int i = 0; i < 7000; i++)
 			{					
-			char floorCounter = input[i];
-			floorCounter == '(' ? floor++ : floor--;
+				char floorCounter = input[i];
+				floorCounter == '(' ? floor++ : floor--;
 			}
-			printf("%d\n", floor);
+			printf("floor: %d\n", floor);
+
+			floor = 0;
+			for (int i = 0; i < 7000; i++)
+			{
+				char floorCounter = input[i];
+				floorCounter == '(' ? floor++ : floor--;
+				if (floor == -1)
+				{
+					basement = i+1;
+					break;
+				}
+			}
+			printf("basement position: %d\n", basement);
 		}
 	}
 	else 
